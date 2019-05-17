@@ -1,20 +1,52 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+ <!-- Laoding page  -->
+ <div class="preloader">
+    <div class="spinner">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+    </div>
+  </div>
+
+
+<section class="section-full image-bg">
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <a href="index.html"><div class="responsive-logo hidden-lg hidden-md hidden-sm"><img src="img/logo.png"></div></a>
+        
+        <!-- Begin .HorizontalTab -->
+        <div class="VerticalTab VerticalTab_hash_scroll VerticalTab_6 tabs_ver_6">
+        
+          <ul class="resp-tabs-list hor_1">
+            <a href="index.html"><div class="logo"><img src="assets/img/logo.png"></div></a>
+            <li class="tabs-1" data-tab-name="home"><span class="tabs-text"><a routerLink="/home">Welcome Intro</a></span></li>
+            <li class="tabs-2" data-tab-name="resume"><span class="tabs-text">About Us</span></li>
+            <li class="tabs-3" data-tab-name="portfolio"><span class="tabs-text">Our Projects</span></li>             
+            <li class="tabs-4" data-tab-name="survey"><span class="tabs-text"><a routerLink="/survey">Survey</a></span></li>
+          </ul>
+          
+          <div class="resp-tabs-container hor_1 tabs_scroll">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <!-- End .HorizontalTab -->
+      
+      </div>
+      
+    </div>
+    
+  </div>
+
+</section>
+<!-- End HorizontalTab style 6 -->
+
+
+  <footer>
+    <p>Copyright &copy; 2017 Your Company 
+                            
+    | Design: <a href="http://www.templatemo.com" target="_parent"><em>template mo</em></a></p>
+  </footer>
 
