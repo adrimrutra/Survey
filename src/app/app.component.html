@@ -1,52 +1,42 @@
- <!-- Laoding page  -->
- <div class="preloader">
-    <div class="spinner">
-      <div class="dot1"></div>
-      <div class="dot2"></div>
-    </div>
-  </div>
+<div class="templatemo-logo visible-xs-block">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg logo-left-container">
+			<h1 class="logo-left">Black</h1>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg logo-right-container">
+			<h1 class="logo-right">White</h1>
+    </div>			
+</div>
+
+<div class="templatemo-container">
 
 
-<section class="section-full image-bg">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg left-container">
+            <h1 class="logo-left hidden-xs margin-bottom-60">Black</h1>	
+            <div class="tm-left-inner-container">
+              <ul class="nav nav-stacked templatemo-nav">
+                <li><a [routerLink]="'/home'"><i class="fa fa-home fa-medium"></i>Homepage</a></li>
+                <li><a [routerLink]="'/survey'" ><i class="fa fa-envelope-o fa-medium"></i>Survey</a></li>
+                <li><a [routerLink]="'/staff'" ><i class="fa fa-envelope-o fa-medium"></i>Staff</a></li>
+              </ul>
+            </div>
+        </div> <!-- left section -->
 
-  <div class="container">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg right-container">
+                <h1 class="logo-right hidden-xs margin-bottom-60">White</h1>
 
-    <div class="row">
+                <div class="tm-right-inner-container">
 
-      <div class="col-md-12">
+                <router-outlet></router-outlet>
 
-        <a href="index.html"><div class="responsive-logo hidden-lg hidden-md hidden-sm"><img src="img/logo.png"></div></a>
-        
-        <!-- Begin .HorizontalTab -->
-        <div class="VerticalTab VerticalTab_hash_scroll VerticalTab_6 tabs_ver_6">
-        
-          <ul class="resp-tabs-list hor_1">
-            <a href="index.html"><div class="logo"><img src="assets/img/logo.png"></div></a>
-            <li class="tabs-1" data-tab-name="home"><span class="tabs-text"><a routerLink="/home">Welcome Intro</a></span></li>
-            <li class="tabs-2" data-tab-name="resume"><span class="tabs-text">About Us</span></li>
-            <li class="tabs-3" data-tab-name="portfolio"><span class="tabs-text">Our Projects</span></li>             
-            <li class="tabs-4" data-tab-name="survey"><span class="tabs-text"><a routerLink="/survey">Survey</a></span></li>
-          </ul>
-          
-          <div class="resp-tabs-container hor_1 tabs_scroll">
-            <router-outlet></router-outlet>
-          </div>
-        </div>
-        <!-- End .HorizontalTab -->
-      
-      </div>
-      
-    </div>
-    
-  </div>
+                <footer>
+                  <p class="col-lg-6 col-md-6 col-sm-12 col-xs-12 templatemo-copyright">Copyright &copy; 2019</p>
+                  <p class="col-lg-6 col-md-6 col-sm-12 col-xs-12 templatemo-social">
+                  </p>
+                </footer>
 
-</section>
-<!-- End HorizontalTab style 6 -->
-
-
-  <footer>
-    <p>Copyright &copy; 2017 Your Company 
-                            
-    | Design: <a href="http://www.templatemo.com" target="_parent"><em>template mo</em></a></p>
-  </footer>
-
+               </div>	
+			
+			
+			
+		    </div> <!-- right section -->
+	</div>

@@ -1,34 +1,91 @@
-<div class="fc-tab-4">
+<h1 class="templatemo-header">Survey</h1>
+<div class="row">
+        <div class="col-sm-12 col-md-12">
+            <form action="#" method="post">
+
+
                 
-  <div class="contact-container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="contact-form">
-          <div class="heading">
-            <h2>Say Hello</h2>
-          </div>
-          <form id="contact" action="" method="post">
-            <fieldset>
-              <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="">
-            </fieldset>
-            <fieldset>
-              <input name="email" type="email" class="form-control" id="email" placeholder="Email" required="">
-            </fieldset>
-            <fieldset>
-              <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message" required=""></textarea>
-            </fieldset>
-            <fieldset>
-              <button type="submit" id="form-submit" class="btn">Submit</button>
-            </fieldset>
-          </form>
+                <label for="age">Question 1: Age</label>
+                <div class="form-group">
+                    <input type="number" (keyup)="getAge($event)" required min="0" max="100" id="age" class="form-control" placeholder="Age" />
+                </div>
+
+                <label for="gender">Question 2: Gender</label>
+                <div class="form-group">
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle"   type="button" id="gender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      {{ survey.gender }}<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+                    <li *ngFor="let item of answers.gender" [value]="item" (click)="getGender(item)">{{item}}</li>
+                  </ul>
+                </div>
+              </div>
+
+                
+
+                <label for="license">Question 3: Do you own a car driving license?</label>
+                <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="license" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ survey.license }}
+                      <span class="caret"></span>
+                    </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+                          <li *ngFor="let item of answers.license" [value]="item" (click)="getLicense(item)">{{item}}</li>
+                      </ul>
+                  </div>
+                </div>
+
+                <label for="first_car">Question 4 : Is this your first car?</label>
+                <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="first_car" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      {{ survey.first_car }}
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+                        <li *ngFor="let item of answers.yes_no" [value]="item" (click)="getFirst_car(item)">{{item}}</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <label for="drivetrain">Question 5 : Which drivetrain do you prefer?</label>
+                <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="drivetrain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      {{survey.drivetrain}}
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+                        <li *ngFor="let item of answers.drivetrain" [value]="item" (click)="getDrivetrain(item)">{{item}}</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <label for="drifting">Question 6 : Do you care about drifting?</label>
+                <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="drifting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      {{survey.drifting}}
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
+                        <li *ngFor="let item of answers.yes_no" [value]="item" (click)="getDrifting(item)">{{item}}</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <label for="how_many">Question 7 : How many BMWs did you drive?</label>
+                <div class="form-group">
+                    <input type="number" (keyup)="getHow_many($event)" required min="0" id="how_many" class="form-control"  />
+                </div>
+                
+
+               <button type="button" (click)="addSurvey()" class="btn btn-warning">Submit</button>
+
+            </form>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="more-info">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc purus ligula, ullamcorper id velit id, vestibulum auctor sapien. Sed quis mauris eget sem <em>imperdiet rhoncus hendrerit</em> sed neque.<br><br>Praesent dictum at erat <em>consectetur imperdiet</em>. Vivamus lobortis eros quis elementum egestas. Fusce sed lorem sed tellus convallis pulvinar non eget erat. Nunc sapien mauris, molestie sed interdum vel, pharetra et metus.<br><br><em>1142 Bee Street<br>Grand Rapids, MI 49503</em></p>
-        </div>
-      </div>
+
+        <div class="clearfix"></div>
     </div>
-  </div>
-  
-</div>
