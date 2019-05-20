@@ -3,18 +3,17 @@
         <div class="col-sm-12 col-md-12">
              
                 <label for="drifting">Question 6 : Do you care about drifting?</label>
-                <div class="form-group">
-                <div class="dropdown">
-                   
-                   
-                        <div class="dropdown-menu" *ngFor="let item of _surveys">
+              
+
+
+                <div *ngFor="let item of _surveys"  >
+
                                 <label>{{item.age}}</label>
-                    
-                        </div>
-                  </div>
                 </div>
-       
-        <button type="button" (click)="getSurvey()" class="btn btn-warning">Submit</button>
+
+             
+                
+           
 
         </div>
 
