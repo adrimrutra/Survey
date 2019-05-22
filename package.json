@@ -27,6 +27,7 @@
     "@ngx-pwa/local-storage": "^7.4.2",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^3.4.1",
+    "bootstrap-validator": "^0.11.9",
     "core-js": "^2.6.6",
     "font-awesome": "^4.7.0",
     "guid-typescript": "^1.0.9",

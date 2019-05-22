@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const carmodel = require('./carmodel');
 const Schema = mongoose.Schema;
 
 let Surveys = new Schema({
-    age: {
+  i_id: Schema.Types.ObjectId,
+  age: {
     type: Number
   },
   gender: {
@@ -22,10 +24,8 @@ let Surveys = new Schema({
   },
   how_many: {
     type: Number
-  }
-},{
-    collection: 'Surveys'
+  },
+  carmodels: [{ type: Schema.Types.ObjectId, ref: carmodel }]
 });
-
 
 module.exports = mongoose.model('Surveys', Surveys);

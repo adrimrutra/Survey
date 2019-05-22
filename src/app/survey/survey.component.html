@@ -1,88 +1,102 @@
 <h1 class="templatemo-header">Survey</h1>
 <div class="row">
         <div class="col-sm-12 col-md-12">
-            <form action="#" method="post">
+            <form role="form" data-toggle="validator">
+         
+
+                <div class="form-group">
+                  <label for="age" class="control-label">Question 1: Age</label>
+                  <input type="number" (keyup)="getAge($event)" name="age" required min="0" max="100" id="age" class="form-control" placeholder="Age" />
+                   <div class="help-block with-errors"></div>
+                </div>
+
+          
+                <div class="form-group">
+                    <label for="gender" >Question 2: Gender</label>
+                    <select class="form-control" required id="gender" name="gender">
+                      <option *ngFor="let item of answers.gender" [value]="item" (click)="getGender(item)">{{item}}</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="license">Question 3: Do you own a car driving license?</label>
+                    <select class="form-control" id="license" required name="license">
+                      <option *ngFor="let item of answers.license" [value]="item" (click)="getLicense(item)">{{item}}</option>
+                    </select>
+                </div>
+
+
+     
+                <div class="form-group">
+                    <label for="first_car">Question 4 : Is this your first car?</label>
+                    <select class="form-control" id="first_car" required name="first_car">
+                      <option *ngFor="let item of answers.yes_no" [value]="item" (click)="getFirst_car(item)">{{item}}</option>
+                    </select>
+                </div>
+
+
+    
+                <div class="form-group">
+                    <label for="drivetrain">Question 5 : Which drivetrain do you prefer?</label>
+                    <select class="form-control" id="drivetrain" required name="drivetrain">
+                      <option *ngFor="let item of answers.drivetrain" [value]="item" (click)="getDrivetrain(item)">{{item}}</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="drifting">Question 6 : Do you care about drifting?</label>
+                    <select class="form-control" id="drifting" required name="drifting">
+                      <option *ngFor="let item of answers.yes_no" [value]="item" (click)="getDrifting(item)">{{item}}</option>
+                    </select>
+                </div>
+
+
+
+           
+                <div class="form-group">
+                  <label for="how_many" class="control-label">Question 7 : How many BMWs did you drive?</label>
+                  <input type="number" (keyup)="getHow_many($event)" required min="0" id="how_many" class="form-control" placeholder="How many BMWs did you drive?" />
+                  <!-- <div class="help-block with-errors"></div> -->
+                </div>
+
+<!-- [(ngModel)]=''    [value]="item"  *ngif="survey.models"  [value]="model"  (click)="getModels(item)"--><!-- [(ngModel)]="model" [ngModelOptions]="{standalone: true}" -->
+             
+                <div class="form-group"  *ngFor="let model of survey.models" >
+                    <label for="bmw_model" class="control-label">Which BMW did you drive?</label>
+                    <input type="text" required
+  
+                    pattern="(^[M]\d{3}[d|i]$)|(^[X|Z]\d{1}$)" 
+                    class="form-control" 
+                    id="bmw_model" 
+                    placeholder="M320i" 
+                    required
+                    title="You haw to insert either M000d or M000i or Z0 or X0  BMW models" >
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                                  <!-- [(ngModel)]="model"
+                    [ngModelOptions]="{standalone: true}" -->
+         
+
+            
 
 
                 
-                <label for="age">Question 1: Age</label>
-                <div class="form-group">
-                    <input type="number" (keyup)="getAge($event)" required min="0" max="100" id="age" class="form-control" placeholder="Age" />
-                </div>
 
-                <label for="gender">Question 2: Gender</label>
-                <div class="form-group">
-                <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle"   type="button" id="gender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      {{ survey.gender }}<span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
-                    <li *ngFor="let item of answers.gender" [value]="item" (click)="getGender(item)">{{item}}</li>
-                  </ul>
-                </div>
-              </div>
+           
+
+
+
+
 
                 
 
-                <label for="license">Question 3: Do you own a car driving license?</label>
                 <div class="form-group">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="license" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        {{ survey.license }}
-                      <span class="caret"></span>
-                    </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
-                          <li *ngFor="let item of answers.license" [value]="item" (click)="getLicense(item)">{{item}}</li>
-                      </ul>
-                  </div>
+                  <button type="submit" (click)="addSurvey()" class="btn btn-default">Submit</button>
                 </div>
 
-                <label for="first_car">Question 4 : Is this your first car?</label>
-                <div class="form-group">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="first_car" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      {{ survey.first_car }}
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
-                        <li *ngFor="let item of answers.yes_no" [value]="item" (click)="getFirst_car(item)">{{item}}</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <label for="drivetrain">Question 5 : Which drivetrain do you prefer?</label>
-                <div class="form-group">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="drivetrain" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      {{survey.drivetrain}}
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
-                        <li *ngFor="let item of answers.drivetrain" [value]="item" (click)="getDrivetrain(item)">{{item}}</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <label for="drifting">Question 6 : Do you care about drifting?</label>
-                <div class="form-group">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="drifting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      {{survey.drifting}}
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" >
-                        <li *ngFor="let item of answers.yes_no" [value]="item" (click)="getDrifting(item)">{{item}}</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <label for="how_many">Question 7 : How many BMWs did you drive?</label>
-                <div class="form-group">
-                    <input type="number" (keyup)="getHow_many($event)" required min="0" id="how_many" class="form-control"  />
-                </div>
-                
-
-               <button type="button" (click)="addSurvey()" class="btn btn-warning">Submit</button>
 
             </form>
         </div>
