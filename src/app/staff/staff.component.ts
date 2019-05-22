@@ -73,14 +73,9 @@ export class StaffComponent implements OnInit {
               how_many_own ++;
             }
           });
-
-
           this.barChartData = [
             {data: [adolescents, unlicensed, first_timers, targetables], label: 'All Participated'}
           ];
-
-          
-
           drivetrain = Math.trunc(drivetrain * 100 / targetables) ;
           drifting = Math.trunc(drifting * 100 / targetables);
           how_many = Math.trunc( how_many / how_many_own);
