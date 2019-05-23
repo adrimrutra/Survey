@@ -28,11 +28,12 @@ export class StaffComponent implements OnInit {
   public barChartLegend = true;
   public barChartData =  [{data: [], label: 'All Participated'}];
 
-  public pieChartLabels = ['The percentage of targetables that care about drifting', 
-  'The percentage of targetables that picked FWD or “I don’t know” for drivetrain', 
+  public pieChartLabels = ['The percentage of targetables that care about drifting',
+  'The percentage of targetables that picked FWD or “I don’t know” for drivetrain',
   'The average amount of BMWs owned by targetables'];
   public pieChartType = 'pie';
-  public pieChartData = [{data: [], label: 'The Participated divided by different group'}];   
+  public pieChartData = [{data: [], label: 'The Participated divided by different group'}];
+  public all_models = [];
 
 
   ngOnInit() {
@@ -45,33 +46,50 @@ export class StaffComponent implements OnInit {
     let how_many = 0;
     let how_many_own = 0;
 
+
     this.surveyService.getAllSurvey()
       .subscribe(res => {
         this._surveys = res;
-    
-        if(this._surveys != null) {
+        if ( this._surveys != null ) {
           targetables = this._surveys.length;
 
           this._surveys.forEach(element => {
-            if(element.age < 18){
+            if (element.age < 18) {
               adolescents ++;
             }
-            if(element.license == 'No, I prefer using other transport'){
+            if (element.license === 'No, I prefer using other transport') {
               unlicensed ++;
             }
-            if(element.age >= 18 && element.age <= 25 && element.first_car == 'Yes'){
+            if (element.age >= 18 && element.age <= 25 && element.first_car === 'Yes') {
               first_timers ++;
             }
-            if(element.drivetrain == 'FWD' || element.drivetrain == 'I don’t know'){
+            if (element.drivetrain === 'FWD' || element.drivetrain === 'I don’t know') {
               drivetrain ++;
             }
-            if(element.drifting == 'Yes'){
+            if (element.drifting === 'Yes') {
               drifting ++;
             }
-            if(element.how_many > 0){
+            if (element.how_many > 0) {
               how_many += element.how_many;
               how_many_own ++;
             }
+
+           element.models.forEach(item => {
+            this.all_models.find(item)
+
+            var found = this.all_models.find(function(value, index, array) {
+              array.push(999);
+              visited.push(value);
+              return false;
+            });
+
+
+
+            this.all_models.push({item : 1});
+           });
+
+
+
           });
           this.barChartData = [
             {data: [adolescents, unlicensed, first_timers, targetables], label: 'All Participated'}
@@ -82,9 +100,8 @@ export class StaffComponent implements OnInit {
 
           this.pieChartData = [
             {data: [drifting, drivetrain, how_many], label: 'The Participated divided by different group'}
-          ];         
+          ];
   }
-    
   }, err => {
     console.log(err);
   });
