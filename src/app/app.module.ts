@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 /*************************Components****************************/
 import { AppComponent } from './app.component';
@@ -30,10 +31,13 @@ import { SurveyService } from './services/survey.service';
     HttpClientModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
+    FormsModule,
+    ChartsModule,
     FormsModule
- 
   ],
-  providers: [SurveyService],
+  providers: [
+    SurveyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

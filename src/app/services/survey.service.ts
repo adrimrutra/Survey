@@ -22,9 +22,9 @@ export class SurveyService {
         );
   }
 
-  getAllSurvey(): Observable<Survey>  {
+  getAllSurvey(): Observable<Survey[]>  {
 
-    return this.http.get<Survey>(apiUrl);
+    return this.http.get<Survey[]>(apiUrl);
     // return this.http.get<Survey[]>(apiUrl)
     // .pipe(
     //   tap(heroes => console.log('fetched Surveys')),
