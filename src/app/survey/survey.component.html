@@ -1,8 +1,10 @@
 <h1 class="templatemo-header">Survey</h1>
 <div class="row">
         <div class="col-sm-12 col-md-12">
-            <form role="form" data-toggle="validator">
+            <form role="form" data-toggle="validator" (ngSubmit)="addSurvey()">
          
+              
+               
 
                 <div class="form-group">
                   <label for="age" class="control-label">Question 1: Age</label>
@@ -12,42 +14,41 @@
 
                 <div class="form-group">
                     <label for="gender" >Question 2: Gender</label>
-                    <select class="form-control" required id="gender" name="gender">
-                      <option *ngFor="let item of answers.gender" [value]="item" (click)="getGender(item)">{{item}}</option>
+                    <select class="form-control" required id="gender" name="gender" (change)="getGender($event)">
+                      <option *ngFor="let item of answers.gender" [value]="item" >{{item}}</option>
                     </select>
                 </div>
 
                     <div *ngIf="q_tree">
                         <div class="form-group">
                             <label for="license">Question 3: Do you own a car driving license?</label>
-                            <select class="form-control" id="license" required name="license">
-                              <option *ngFor="let item of answers.license" [value]="item" (click)="getLicense(item)">{{item}}</option>
+                            <select class="form-control" id="license" required name="license" (change)="getLicense($event)">
+                              <option *ngFor="let item of answers.license" [value]="item">{{item}}</option>
                             </select>
                         </div>
-
-
+               
             
                         <div *ngIf="young_driver" class="form-group">
                             <label for="first_car">Question 4 : Is this your first car?</label>
-                            <select class="form-control" id="first_car" required name="first_car">
-                              <option *ngFor="let item of answers.yes_no" [value]="item" (click)="getFirst_car(item)">{{item}}</option>
+                            <select class="form-control" id="first_car" required name="first_car" (change)="getFirst_car($event)">
+                              <option *ngFor="let item of answers.yes_no" [value]="item" >{{item}}</option>
                             </select>
                         </div>
 
                         <div *ngIf="q_five">
             
                               <div class="form-group">
-                                  <label for="drivetrain">Question 5 : Which drivetrain do you prefer?</label>
-                                  <select class="form-control" id="drivetrain" required name="drivetrain">
-                                    <option *ngFor="let item of answers.drivetrain" [value]="item" (click)="getDrivetrain(item)">{{item}}</option>
+                                  <label for="drivetrain">Question {{five}} : Which drivetrain do you prefer?</label>
+                                  <select class="form-control" id="drivetrain" required name="drivetrain" (change)="getDrivetrain($event)">
+                                    <option *ngFor="let item of answers.drivetrain" [value]="item">{{item}}</option>
                                   </select>
                               </div>
 
 
                               <div class="form-group">
-                                  <label for="drifting">Question 6 : Do you care about drifting?</label>
-                                  <select class="form-control" id="drifting" required name="drifting">
-                                    <option *ngFor="let item of answers.yes_no" [value]="item" (click)="getDrifting(item)">{{item}}</option>
+                                  <label for="drifting">Question {{six}} : Do you care about drifting?</label>
+                                  <select class="form-control" id="drifting" required name="drifting" (change)="getDrifting($event)">
+                                    <option *ngFor="let item of answers.yes_no" [value]="item">{{item}}</option>
                                   </select>
                               </div>
 
@@ -55,26 +56,35 @@
 
                         
                               <div class="form-group">
-                                <label for="how_many" class="control-label">Question 7 : How many BMWs did you drive?</label>
+                                <label for="how_many" class="control-label">Question {{seven}} : How many BMWs did you drive?</label>
                                 <input type="number" (keyup)="getHow_many($event)" required min="0" id="how_many" class="form-control" placeholder="How many BMWs did you drive?" />
-                                <!-- <div class="help-block with-errors"></div> -->
+                                <div class="help-block with-errors"></div>
                               </div>
 
-                                <!-- [(ngModel)]=''    [value]="item"  *ngif="survey.models"  [value]="model"  (click)="getModels(item)"--><!-- [(ngModel)]="model" [ngModelOptions]="{standalone: true}" -->
+   <!-- [(ngModel)]="model"
+                                  [ngModelOptions]="{standalone: true}" -->
+
+
+                                <!-- (click)="getModels(item)"  pattern="^[M]\d{3}[d|i]$"    |(^[X|Z]\d{1}$) --><!-- [(ngModel)]="model" [ngModelOptions]="{standalone: true}" -->
                           
-                              <div class="form-group"  *ngFor="let model of survey.models" >
-                                  <label for="bmw_model" class="control-label">Which BMW did you drive?</label>
-                                  <input type="text" required
-                                  [(ngModel)]="model"
-                                  [ngModelOptions]="{standalone: true}"
-                                  pattern="(^[M]\d{3}[d|i]$)|(^[X|Z]\d{1}$)" 
-                                  class="form-control" 
-                                  id="bmw_model" 
-                                  placeholder="M320i" 
-                                  required
-                                  title="You haw to insert either M000d or M000i or Z0 or X0  BMW models" >
-                                  <div class="help-block with-errors"></div>
-                              </div>
+                                <!--  <div class="form-group"  *ngFor="let model of survey.models" >     title="You haw to insert either M000d or M000i or Z0 or X0  BMW models"   -->
+                  
+                <!-- </div>       [(ngModel)]="model" 
+                                        [ngModelOptions]="{standalone: true}"    |(^[X|Z]\d{1}$) -->
+
+                                <div *ngFor="let model of survey.models">
+                                  <div class="form-group">
+                                      <label for="bmw_model" class="control-label">Which BMW did you drive?</label>
+                                        <input type="text" required pattern="^[M]\d{3}[d|i]$"
+                                       
+                                        class="form-control" 
+                                        id="bmw_model" 
+                                        placeholder="M320i" 
+                                        title="You haw to insert either M000d or M000i or Z0 or X0  BMW models">
+                                        <div class="help-block with-errors"></div>
+                                  </div>
+                                </div>
+
 
                               <div class="form-group">
                                 <button type="submit" (click)="addSurvey()" class="btn btn-default">Submit</button>

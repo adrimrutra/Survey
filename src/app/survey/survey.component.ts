@@ -35,19 +35,6 @@ export class SurveyComponent implements OnInit {
 
   getAge(event: any) {
     this.survey.age = event.target.value ;
-
-    if (this.survey.gender === 'M' || this.survey.gender === 'F') {
-      if (this.survey.age < 18 ) {
-          this.addSurvey();
-      } else if (this.survey.age >= 18) {
-          this.q_tree = true;
-      }
-
-    }
-  }
-
-  getGender(value: any) {
-    this.survey.gender = value;
     if (this.survey.gender === 'M' || this.survey.gender === 'F') {
       if (this.survey.age < 18 ) {
           this.addSurvey();
@@ -57,8 +44,19 @@ export class SurveyComponent implements OnInit {
     }
   }
 
-  getLicense(value: any) {
-    this.survey.license = value;
+  getGender(event: any) {
+    this.survey.gender = event.target.value;
+    if (this.survey.gender === 'M' || this.survey.gender === 'F') {
+      if (this.survey.age < 18 ) {
+          this.addSurvey();
+      } else if (this.survey.age >= 18) {
+          this.q_tree = true;
+      }
+    }
+  }
+
+  getLicense(event: any) {
+    this.survey.license = event.target.value;
     if (this.survey.license === 'Yes') {
       if (this.survey.age >= 18 && this.survey.age < 25) {
         this.young_driver = true;
@@ -75,8 +73,8 @@ export class SurveyComponent implements OnInit {
     }
   }
 
-  getFirst_car(value: any) {
-    this.survey.first_car = value;
+  getFirst_car(event: any) {
+    this.survey.first_car = event.target.value;
     if (this.survey.first_car === 'No') {
        this.q_five = true;
     } else if (this.survey.first_car === 'Yes') {
@@ -84,12 +82,12 @@ export class SurveyComponent implements OnInit {
     }
   }
 
-  getDrivetrain(value: any) {
-    this.survey.drivetrain = value;
+  getDrivetrain(event: any) {
+    this.survey.drivetrain = event.target.value;
   }
 
-  getDrifting(value: any) {
-    this.survey.drifting = value;
+  getDrifting(event: any) {
+    this.survey.drifting = event.target.value;
   }
 
   getHow_many(event: any) {
