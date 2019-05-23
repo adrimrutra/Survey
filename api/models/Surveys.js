@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const carmodel = require('./carmodel');
 const Schema = mongoose.Schema;
 
 let Surveys = new Schema({
@@ -25,7 +24,7 @@ let Surveys = new Schema({
   how_many: {
     type: Number
   },
-  carmodels: [{ type: Schema.Types.ObjectId, ref: carmodel }]
+  carmodels: [{type: String}]
 });
 
 module.exports = mongoose.model('Surveys', Surveys);

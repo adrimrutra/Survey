@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../services/survey.service';
 import { Survey } from '../models/survey';
-import { Carmodel } from '../models/carmodel';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -33,15 +33,15 @@ export class SurveyComponent implements OnInit {
     }
   }
 
-  getGender(value: any){
+  getGender(value: any) {
     this.survey.gender = value;
   }
 
-  getLicense(value: any){
+  getLicense(value: any) {
     this.survey.license = value;
   }
 
-  getFirst_car(value: any){
+  getFirst_car(value: any) {
     this.survey.first_car = value;
   }
 
@@ -57,7 +57,7 @@ export class SurveyComponent implements OnInit {
     this.survey.how_many = event.target.value ;
     this.survey.models = [];
     for (let index = 0; index < this.survey.how_many ; index++) {
-      this.survey.models.push(new Carmodel());
+      this.survey.models.push('');
     }
   }
 

@@ -66,7 +66,8 @@
                 <div class="form-group"  *ngFor="let model of survey.models" >
                     <label for="bmw_model" class="control-label">Which BMW did you drive?</label>
                     <input type="text" required
-  
+                    [(ngModel)]="model"
+                    [ngModelOptions]="{standalone: true}"
                     pattern="(^[M]\d{3}[d|i]$)|(^[X|Z]\d{1}$)" 
                     class="form-control" 
                     id="bmw_model" 
@@ -76,8 +77,7 @@
                     <div class="help-block with-errors"></div>
                 </div>
 
-                                  <!-- [(ngModel)]="model"
-                    [ngModelOptions]="{standalone: true}" -->
+                                  
          
 
             

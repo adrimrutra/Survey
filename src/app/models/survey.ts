@@ -1,5 +1,3 @@
-import { Carmodel } from './carmodel';
-
 export class Survey {
     age: number;
     gender: string;
@@ -8,7 +6,7 @@ export class Survey {
     drivetrain: string;
     drifting: string;
     how_many: number;
-    models: Carmodel [];
+    models: string [];
     constructor() {
         this.age = 0;
         this.gender = '';
