@@ -10,10 +10,8 @@ import { Survey } from '../models/survey';
   styleUrls: ['./staff.component.css']
 })
 export class StaffComponent implements OnInit {
-  public _surveys : Survey [];
-  
   constructor(private surveyService: SurveyService) { }
-
+  public _surveys: Survey [];
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -31,9 +29,11 @@ export class StaffComponent implements OnInit {
   public pieChartLabels = ['The percentage of targetables that care about drifting',
   'The percentage of targetables that picked FWD or “I don’t know” for drivetrain',
   'The average amount of BMWs owned by targetables'];
+
   public pieChartType = 'pie';
   public pieChartData = [{data: [], label: 'The Participated divided by different group'}];
   public all_models = [];
+  public count_models = [];
 
 
   ngOnInit() {
@@ -50,6 +50,7 @@ export class StaffComponent implements OnInit {
     this.surveyService.getAllSurvey()
       .subscribe(res => {
         this._surveys = res;
+        console.log(this._surveys);
         if ( this._surveys != null ) {
           targetables = this._surveys.length;
 
@@ -74,23 +75,42 @@ export class StaffComponent implements OnInit {
               how_many_own ++;
             }
 
-           element.models.forEach(item => {
-            this.all_models.find(item)
+            // for (let index = 0; index < element.models.length; index++) {
+            //   if (this.all_models[element.models[index]] === -1) {
+            //     this.all_models.push(element.models[index]);
+            //     this.count_models.push(1);
+            //   } else {
+            //     this.count_models[this.all_models[element.models[index]]] += 1;
+            //   }
+            // }
+            // element.models.forEach(model => {
+            //   if (this.all_models[model] === -1) {
+            //     this.all_models.push(model);
+            //     this.count_models.push(1);
+            //   } else {
+            //     this.count_models[this.all_models[model]] += 1;
+            //   }
 
-            var found = this.all_models.find(function(value, index, array) {
-              array.push(999);
-              visited.push(value);
-              return false;
-            });
-
-
-
-            this.all_models.push({item : 1});
-           });
-
-
-
+            // });
           });
+
+          this.pieChartLabels = ['The percentage of targetables that care about drifting',
+          'The percentage of targetables that picked FWD or “I don’t know” for drivetrain',
+          'The average amount of BMWs owned by targetables'];
+
+          // this.all_models.forEach(element => {
+          //   this.pieChartLabels.push(element);
+          // });
+
+          this.pieChartData = [
+            {data: [drifting, drivetrain, how_many], label: 'The Participated divided by different group'}
+          ];
+
+         // this.pieChartData[0].data = this.count_models;
+
+
+
+
           this.barChartData = [
             {data: [adolescents, unlicensed, first_timers, targetables], label: 'All Participated'}
           ];
@@ -98,14 +118,25 @@ export class StaffComponent implements OnInit {
           drifting = Math.trunc(drifting * 100 / targetables);
           how_many = Math.trunc( how_many / how_many_own);
 
-          this.pieChartData = [
-            {data: [drifting, drivetrain, how_many], label: 'The Participated divided by different group'}
-          ];
+
+
+          
   }
   }, err => {
     console.log(err);
   });
 
+
+  // var beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+
+  //           console.log(beasts.indexOf('bison'));
+  //           // expected output: 1
+            
+  //           // start from index 2
+  //           console.log(beasts.indexOf('bison', 2));
+  //           // expected output: 4
+            
+  //           console.log(beasts.indexOf('giraffe'));
 
 
   }

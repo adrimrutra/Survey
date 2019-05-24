@@ -6,15 +6,15 @@ export class Survey {
     drivetrain: string;
     drifting: string;
     how_many: number;
-    models: string [];
+    models:  Array<string>;
     constructor() {
-        this.age = 0;
-        this.gender = '';
-        this.license = '';
-        this.first_car = '';
-        this.drivetrain = '';
-        this.drifting = '';
-        this.how_many = 0;
-        this.models =  [];
+        // this.age = 0;
+        // this.gender = '';
+        // this.license = '';
+        // this.first_car = '';
+        // this.drivetrain = '';
+        // this.drifting = '';
+        // this.how_many = 0;
+        // this.models =  new Array<string>();
     }
 }

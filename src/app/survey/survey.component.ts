@@ -34,6 +34,9 @@ export class SurveyComponent implements OnInit {
   }
 
   getAge(event: any) {
+      alert(this.survey.age);
+
+
     this.survey.age = event.target.value ;
     if (this.survey.gender === 'M' || this.survey.gender === 'F') {
       if (this.survey.age < 18 ) {
@@ -97,6 +100,12 @@ export class SurveyComponent implements OnInit {
       this.survey.models.push('');
     }
   }
+
+  getModel(event: any) {
+   //alert(event.target.index);
+   // alert(event.target.value);
+  }
+
 
   addSurvey() {
     this.surveyService.addSurvey(this.survey)
