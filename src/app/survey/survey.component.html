@@ -1,81 +1,86 @@
 <h1 class="templatemo-header">Survey</h1>
 <div class="row">
-        <div class="col-sm-12 col-md-12">
-
-
-            <!-- (ngSubmit)="addSurvey()" -->
+        <div class="col-sm-12 col-md-12" >
             <p class="bg-success">Thank you for partisipation</p>
-            <form role="form" data-toggle="validator" >
+
+            <form role="form" data-toggle="validator" [formGroup]="surveyForm">
+
                 <div class="form-group">
                   <label for="age" class="control-label">Question 1: Age</label>
-                  <input type="number" [(ngModel)]="survey.age" (keyup)="getAge($event)" name="age" required min="0" max="100" id="age" class="form-control" placeholder="Age" />
+                  <input type="number" (keyup)="checkAgeGender()" formControlName="age" required min="0" max="100" id="age" class="form-control" placeholder="Age" />
                    <div class="help-block with-errors"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="gender" >Question 2: Gender</label>
-                    <select class="form-control" required id="gender" name="gender" (change)="getGender($event)">
-                      <option *ngFor="let item of answers.gender" [value]="item">{{item}}</option>
+                    <select class="form-control" required id="gender" formControlName="gender" 
+                    (change)="checkAgeGender()">
+                      <option *ngFor="let item of answers.gender" [value]="item.choice">{{item.choice}}</option>
                     </select>
                 </div>
   
-                    <div [hidden]="!q_tree">
+                <div [hidden]="!q_three"> 
                         <div class="form-group">
                             <label for="license">Question 3: Do you own a car driving license?</label>
-                            <select class="form-control" id="license" required name="license" (change)="getLicense($event)">
-                              <option *ngFor="let item of answers.license" [value]="item">{{item}}</option>
+                            <select class="form-control" id="license" required formControlName="license" (change)="isLicense()">
+                              <option *ngFor="let item of answers.license" [value]="item.choice">{{item.choice}}</option>
                             </select>
                         </div>
                
-            
-                        <div [hidden]="!young_driver" class="form-group">
+                        
+                        <div class="form-group" [hidden]="!young_driver" >
                             <label for="first_car">Question 4 : Is this your first car?</label>
-                            <select class="form-control" id="first_car" required name="first_car" (change)="getFirst_car($event)">
-                              <option *ngFor="let item of answers.yes_no" [value]="item" >{{item}}</option>
+                            <select class="form-control" id="first_car" required formControlName="first_car" (change)="isFirstCar()">
+                              <option *ngFor="let item of answers.yes_no" [value]="item.choice" >{{item.choice}}</option>
                             </select>
                         </div>
 
-                        <div [hidden]="!q_five">
+                         <div [hidden]="!q_five"> 
             
-                              <div class="form-group">
+                               <div class="form-group">
                                   <label for="drivetrain">Question {{five}} : Which drivetrain do you prefer?</label>
-                                  <select class="form-control" id="drivetrain" required name="drivetrain" (change)="getDrivetrain($event)">
-                                    <option *ngFor="let item of answers.drivetrain" [value]="item">{{item}}</option>
+                                  <select class="form-control" id="drivetrain" required formControlName="drivetrain">
+                                    <option *ngFor="let item of answers.drivetrain" [value]="item.choice">{{item.choice}}</option>
                                   </select>
                               </div>
 
                               <div class="form-group">
                                   <label for="drifting">Question {{six}} : Do you care about drifting?</label>
-                                  <select class="form-control" id="drifting" required name="drifting" (change)="getDrifting($event)">
-                                    <option *ngFor="let item of answers.yes_no" [value]="item">{{item}}</option>
+                                  <select class="form-control" id="drifting" required formControlName="drifting">
+                                    <option *ngFor="let item of answers.yes_no" [value]="item.choice">{{item.choice}}</option>
                                   </select>
                               </div>
                         
-                              <div class="form-group">
+                             <div class="form-group">
                                 <label for="how_many" class="control-label">Question {{seven}} : How many BMWs did you drive?</label>
-                                <input type="number" (keyup)="getHow_many($event)" required min="0" id="how_many" class="form-control" placeholder="How many BMWs did you drive?" />
+                                <input type="number" (keyup)="isDriven()" required formControlName="how_many" id="how_many" class="form-control" placeholder="How many BMWs did you drive?" />
                                 <div class="help-block with-errors"></div>
-                              </div>
-                                <!-- (click)="getModels(item)"  pattern="^[M]\d{3}[d|i]$"    |(^[X|Z]\d{1}$) --><!-- [(ngModel)]="model" [ngModelOptions]="{standalone: true}" 
-      
-                                        [ngModelOptions]="{standalone: true}"    |(^[X|Z]\d{1}$) title="You haw to insert either M000d or M000i or Z0 or X0  BMW models"-->
-
-                              <div *ngFor="let model of survey.models">
-                                <div class="form-group">
-                                    <label for="bmw_model" class="control-label">Which BMW did you drive?</label>
-                                      <input type="text" [(ngModel)]="model"  (keyup)="getModel($event)" name="bmw_model" required pattern="(^[M]\d{3}[d|i])$|(^[X|Z]\d{1}$)" id="bmw_model" class="form-control"  placeholder="M320i" >
+                             </div>
+  
+                              <div formArrayName="carmodels">
+                                <div class="form-group" *ngFor="let item of carmodels.controls; let i = index" >
+                                    <label [attr.for]="i"  class="control-label">Which BMW did you drive?</label>
+                                      <input type="text" [formControlName]="i"
+                                      id="i"
+                                      class="form-control"  
+                                      placeholder="M320i" 
+                                      pattern="(^[M]\d{3}[d|i])$|(^[X|Z]\d{1}$)"
+                                      required />
+                                      <!-- <div class="help-block with-errors"></div> -->
+                                      <!-- <div *ngIf="i.invalid && !i.pristine">
+                                        <p *ngIf="i.errors.email">Valid email is required.</p>
+                                      </div> -->
                                 </div>
+                                
                               </div>
-
 
                               <div class="form-group">
                                 <button type="submit" (click)="addSurvey()" class="btn btn-default">Submit</button>
                               </div>
-
-                          </div>           
-                  </div>
+                          </div>          
+                  </div> 
               </form>
-            </div>
+        </div>
     
       <div class="clearfix"></div>
 </div>

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Surveys = new Schema({
-  i_id: Schema.Types.ObjectId,
   age: {
     type: Number
   },

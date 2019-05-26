@@ -1,16 +1,17 @@
 import { Component, OnInit , ViewEncapsulation } from '@angular/core';
 import { SurveyService } from '../services/survey.service';
 import { Survey } from '../models/survey';
-
+import { Carmodel } from '../models/carmodel';
 
 
 @Component({
   selector: 'app-staff',
   templateUrl: './staff.component.html',
-  styleUrls: ['./staff.component.css']
+  styleUrls: ['./staff.component.css'],
+  providers:  [SurveyService]
 })
 export class StaffComponent implements OnInit {
-  constructor(private surveyService: SurveyService) { }
+  
   public _surveys: Survey [];
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -34,6 +35,11 @@ export class StaffComponent implements OnInit {
   public pieChartData = [{data: [], label: 'The Participated divided by different group'}];
   public all_models = [];
   public count_models = [];
+  public allcar: Array<Carmodel>;
+
+  constructor(private surveyService: SurveyService) { 
+    this.allcar = new Array<Carmodel>();
+  }
 
 
   ngOnInit() {
@@ -46,6 +52,15 @@ export class StaffComponent implements OnInit {
     let how_many = 0;
     let how_many_own = 0;
 
+    let  containsCar = function(arr, car) {
+      var contains = arr.filter(function(obj){
+          if(obj.name === car){
+            obj.count++;
+            return true;
+          } 
+        }).length >=1;
+        return contains;
+      };
 
     this.surveyService.getAllSurvey()
       .subscribe(res => {
@@ -74,42 +89,29 @@ export class StaffComponent implements OnInit {
               how_many += element.how_many;
               how_many_own ++;
             }
+            
+            element.carmodels.forEach(model => {
+              if(this.allcar.length === 0 || this.allcar.length > 0 && !containsCar(this.allcar, model)) {
+                this.allcar.push(new Carmodel (model, 1));
+              }
+            });
 
-            // for (let index = 0; index < element.models.length; index++) {
-            //   if (this.all_models[element.models[index]] === -1) {
-            //     this.all_models.push(element.models[index]);
-            //     this.count_models.push(1);
-            //   } else {
-            //     this.count_models[this.all_models[element.models[index]]] += 1;
-            //   }
-            // }
-            // element.models.forEach(model => {
-            //   if (this.all_models[model] === -1) {
-            //     this.all_models.push(model);
-            //     this.count_models.push(1);
-            //   } else {
-            //     this.count_models[this.all_models[model]] += 1;
-            //   }
-
-            // });
-          });
+          });      
 
           this.pieChartLabels = ['The percentage of targetables that care about drifting',
           'The percentage of targetables that picked FWD or “I don’t know” for drivetrain',
           'The average amount of BMWs owned by targetables'];
-
-          // this.all_models.forEach(element => {
-          //   this.pieChartLabels.push(element);
-          // });
+          
+          let data = [drifting, drivetrain, how_many];
+          
+          this.allcar.forEach(element => {
+            this.pieChartLabels.push(element.name);
+            data.push(element.count)
+          });
 
           this.pieChartData = [
-            {data: [drifting, drivetrain, how_many], label: 'The Participated divided by different group'}
+            {data: data, label: 'The Participated divided by different group'}
           ];
-
-         // this.pieChartData[0].data = this.count_models;
-
-
-
 
           this.barChartData = [
             {data: [adolescents, unlicensed, first_timers, targetables], label: 'All Participated'}
@@ -118,9 +120,6 @@ export class StaffComponent implements OnInit {
           drifting = Math.trunc(drifting * 100 / targetables);
           how_many = Math.trunc( how_many / how_many_own);
 
-
-
-          
   }
   }, err => {
     console.log(err);

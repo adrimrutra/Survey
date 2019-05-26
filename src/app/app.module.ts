@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 
 /*************************Components****************************/
@@ -18,7 +18,6 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { SurveyService } from './services/survey.service';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +30,8 @@ import { SurveyService } from './services/survey.service';
     HttpClientModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
-    FormsModule,
     ChartsModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   providers: [
     SurveyService
