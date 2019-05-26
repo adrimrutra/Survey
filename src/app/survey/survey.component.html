@@ -1,7 +1,13 @@
 <h1 class="templatemo-header">Survey</h1>
 <div class="row">
         <div class="col-sm-12 col-md-12" >
-            <p class="bg-success">Thank you for partisipation</p>
+
+
+            <div id="myAlert" class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Thank you for your interest !</h4>
+                <p>{{message}}</p>
+                <hr>
+            </div>
 
             <form role="form" data-toggle="validator" [formGroup]="surveyForm">
 
@@ -66,10 +72,7 @@
                                       placeholder="M320i" 
                                       pattern="(^[M]\d{3}[d|i])$|(^[X|Z]\d{1}$)"
                                       required />
-                                      <!-- <div class="help-block with-errors"></div> -->
-                                      <!-- <div *ngIf="i.invalid && !i.pristine">
-                                        <p *ngIf="i.errors.email">Valid email is required.</p>
-                                      </div> -->
+                                      <div class="help-block with-errors"></div>
                                 </div>
                                 
                               </div>

@@ -23,13 +23,7 @@ export class SurveyService {
   }
 
   getAllSurvey(): Observable<Survey[]>  {
-
     return this.http.get<Survey[]>(apiUrl);
-    // return this.http.get<Survey[]>(apiUrl)
-    // .pipe(
-    //   tap(heroes => console.log('fetched Surveys')),
-    //   catchError(this.handleError('getAllSurvey', []))
-    // );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

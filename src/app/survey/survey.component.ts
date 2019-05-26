@@ -3,6 +3,8 @@ import { SurveyService } from '../services/survey.service';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-survey',
@@ -11,9 +13,12 @@ import { FormArray } from '@angular/forms';
   providers:  [SurveyService]
 })
 export class SurveyComponent implements OnInit {
-  constructor(private surveyService: SurveyService, private fb: FormBuilder) {}
+  constructor(private surveyService: SurveyService, private fb: FormBuilder) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    $("#myAlert").hide();
+  }
  
   public answers = {
     gender :  [{'id':1, 'choice':''},{'id':2, 'choice':'M'}, {'id':3, 'choice': 'F'}, {'id':4, 'choice': 'Other'}],
@@ -42,6 +47,7 @@ export class SurveyComponent implements OnInit {
   public six = 6;
   public seven = 7;
   public eight = 8;
+  public message: String;
  
   checkAgeGender() {
     let age = (this.surveyForm.get('age') as FormArray).value;
@@ -78,6 +84,7 @@ export class SurveyComponent implements OnInit {
     if (first_car === 'No') {
        this.q_five = true;
     } else if (first_car === 'Yes') {
+       this.message += 'But we are targeting more experienced clients.';
        this.addSurvey();
     }
   }
@@ -98,6 +105,7 @@ export class SurveyComponent implements OnInit {
     }
   }
   reset(){
+    $("#myAlert").fadeOut(3000);
     this.young_driver = false;
     this.q_three = false;
     this.q_five = false;
@@ -105,12 +113,13 @@ export class SurveyComponent implements OnInit {
     this.six = 6;
     this.seven = 7;
     this.eight = 8;
+    this.message = '';
   }
 
   addSurvey() {
     this.surveyService.addSurvey(this.surveyForm.value)
     .subscribe(res => {
-        alert('Thank you !');
+        $("#myAlert").show();
         this.surveyForm.reset();
         this.reset();
       }, (err) => {
