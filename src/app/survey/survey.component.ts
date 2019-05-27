@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../services/survey.service';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -13,18 +13,13 @@ import * as $ from 'jquery';
   providers:  [SurveyService]
 })
 export class SurveyComponent implements OnInit {
-  constructor(private surveyService: SurveyService, private fb: FormBuilder) {
-  }
+  constructor(private surveyService: SurveyService, private fb: FormBuilder) {}
 
-  ngOnInit() {
-    $("#myAlert").hide();
-  }
- 
   public answers = {
-    gender :  [{'id':1, 'choice':''},{'id':2, 'choice':'M'}, {'id':3, 'choice': 'F'}, {'id':4, 'choice': 'Other'}],
-    license :  [{'id':1,'choice':''},{'id':2, 'choice':'Yes'},{'id':3, 'choice':'No, I prefer using other transport'}],
-    yes_no :  [{'choice':''},{'choice':'Yes'},{'choice':'No'}],
-    drivetrain : [{'choice':''},{'choice':'FWD'},{'choice':'RWD'},{'choice':'I don’t know'}]
+    gender :  [{'id': 1, 'choice': ''}, {'id': 2, 'choice': 'M'}, {'id': 3, 'choice': 'F'}, {'id': 4, 'choice': 'Other'}],
+    license :  [{'id': 1, 'choice': ''}, {'id': 2, 'choice': 'Yes'}, {'id': 3, 'choice': 'No, I prefer using other transport'}],
+    yes_no :  [{'choice': ''}, {'choice': 'Yes'}, {'choice': 'No'}],
+    drivetrain : [{'choice': ''}, {'choice': 'FWD'}, {'choice': 'RWD'}, {'choice': 'I don’t know'}]
   };
   public carPatern = '(^[M]\d{3}[d|i])$|(^[X|Z]\d{1}$)';
 
@@ -32,8 +27,8 @@ export class SurveyComponent implements OnInit {
     age: Number,
     gender: String,
     country: String,
-    license: String, 
-    first_car: String, 
+    license: String,
+    first_car: String,
     drivetrain: String,
     drifting: String,
     how_many: Number,
@@ -48,10 +43,14 @@ export class SurveyComponent implements OnInit {
   public seven = 7;
   public eight = 8;
   public message: String;
- 
+
+  ngOnInit() {
+    $('#myAlert').hide();
+  }
+
   checkAgeGender() {
-    let age = (this.surveyForm.get('age') as FormArray).value;
-    let gender = (this.surveyForm.get('gender') as FormArray).value;
+    const age = (this.surveyForm.get('age') as FormArray).value;
+    const gender = (this.surveyForm.get('gender') as FormArray).value;
     if (gender === 'M' || gender === 'F') {
       if (age < 18 ) {
           this.addSurvey();
@@ -62,8 +61,8 @@ export class SurveyComponent implements OnInit {
   }
 
   isLicense() {
-    let license = (this.surveyForm.get('license') as FormArray).value;
-    let age = (this.surveyForm.get('age') as FormArray).value;
+    const license = (this.surveyForm.get('license') as FormArray).value;
+    const age = (this.surveyForm.get('age') as FormArray).value;
     if (license === 'Yes') {
       if (age >= 18 && age < 25) {
         this.young_driver = true;
@@ -80,7 +79,7 @@ export class SurveyComponent implements OnInit {
   }
 
   isFirstCar() {
-    let first_car = (this.surveyForm.get('first_car') as FormArray).value;
+    const first_car = (this.surveyForm.get('first_car') as FormArray).value;
     if (first_car === 'No') {
        this.q_five = true;
     } else if (first_car === 'Yes') {
@@ -94,7 +93,7 @@ export class SurveyComponent implements OnInit {
   }
 
   isDriven() {
-    let count = (this.surveyForm.get('how_many') as FormArray).value;
+    const count = (this.surveyForm.get('how_many') as FormArray).value;
 
     for (let index = 0; index < this.carmodels.controls.length; index++) {
       this.carmodels.removeAt(index);
@@ -104,8 +103,8 @@ export class SurveyComponent implements OnInit {
       this.carmodels.push(this.fb.control('', [Validators.required, Validators.pattern(this.carPatern)]));
     }
   }
-  reset(){
-    $("#myAlert").fadeOut(3000);
+  reset() {
+    $('#myAlert').fadeOut(3000);
     this.young_driver = false;
     this.q_three = false;
     this.q_five = false;
@@ -119,7 +118,7 @@ export class SurveyComponent implements OnInit {
   addSurvey() {
     this.surveyService.addSurvey(this.surveyForm.value)
     .subscribe(res => {
-        $("#myAlert").show();
+        $('#myAlert').show();
         this.surveyForm.reset();
         this.reset();
       }, (err) => {

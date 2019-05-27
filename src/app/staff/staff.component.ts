@@ -11,7 +11,7 @@ import { Carmodel } from '../models/carmodel';
   providers:  [SurveyService]
 })
 export class StaffComponent implements OnInit {
-  
+
   public _surveys: Survey [];
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -52,18 +52,17 @@ export class StaffComponent implements OnInit {
     let how_many = 0;
     let how_many_own = 0;
 
-    let  containsCar = function(arr, car) {
-      var contains = arr.filter(function(obj){
-          if(obj.name === car){
+    const containsCar = function(arr, car) {
+      const contains = arr.filter(function(obj) {
+          if (obj.name === car) {
             obj.count++;
             return true;
-          } 
-        }).length >=1;
+          }
+        }).length >= 1;
         return contains;
       };
 
-    this.surveyService.getAllSurvey()
-      .subscribe(res => {
+    this.surveyService.getAllSurvey().subscribe(res => {
         this._surveys = res;
         console.log(this._surveys);
         if ( this._surveys != null ) {
@@ -89,28 +88,27 @@ export class StaffComponent implements OnInit {
               how_many += element.how_many;
               how_many_own ++;
             }
-            
             element.carmodels.forEach(model => {
-              if(this.allcar.length === 0 || this.allcar.length > 0 && !containsCar(this.allcar, model)) {
+              if (this.allcar.length === 0 || this.allcar.length > 0 && !containsCar(this.allcar, model)) {
                 this.allcar.push(new Carmodel (model, 1));
               }
             });
 
-          });      
+          });
 
           this.pieChartLabels = ['The percentage of targetables that care about drifting',
           'The percentage of targetables that picked FWD or “I don’t know” for drivetrain',
           'The average amount of BMWs owned by targetables'];
-          
-          let data = [drifting, drivetrain, how_many];
-          
+
+          const dataArr = [drifting, drivetrain, how_many];
+
           this.allcar.forEach(element => {
             this.pieChartLabels.push(element.name);
-            data.push(element.count)
+            dataArr.push(element.count);
           });
 
           this.pieChartData = [
-            {data: data, label: 'The Participated divided by different group'}
+            {data: dataArr, label: 'The Participated divided by different group'}
           ];
 
           this.barChartData = [
@@ -120,23 +118,10 @@ export class StaffComponent implements OnInit {
           drifting = Math.trunc(drifting * 100 / targetables);
           how_many = Math.trunc( how_many / how_many_own);
 
-  }
-  }, err => {
-    console.log(err);
-  });
-
-
-  // var beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
-
-  //           console.log(beasts.indexOf('bison'));
-  //           // expected output: 1
-            
-  //           // start from index 2
-  //           console.log(beasts.indexOf('bison', 2));
-  //           // expected output: 4
-            
-  //           console.log(beasts.indexOf('giraffe'));
-
+      }
+    }, err => {
+      console.log(err);
+    });
 
   }
 
