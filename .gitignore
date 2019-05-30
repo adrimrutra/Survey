@@ -2,8 +2,12 @@
 
 # compiled output
 /dist
+/server-dist
 /tmp
 /out-tsc
+/bin
+/obj
+/upload
 
 # dependencies
 /node_modules
@@ -30,10 +34,20 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
-yarn-error.log
 testem.log
 /typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
 
 # System Files
 .DS_Store
 Thumbs.db
+*.bat
+
+#Visual Studio
+*.sln
+*.suo
+.vscode/launch.json
+.ntvs_analysis.dat
