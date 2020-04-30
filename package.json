@@ -35,7 +35,7 @@
     "core-js": "^2.6.6",
     "font-awesome": "^4.7.0",
     "guid-typescript": "^1.0.9",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng2-charts": "^2.2.3",
     "rxjs": "^6.5.2",
     "zone.js": "^0.8.29"
